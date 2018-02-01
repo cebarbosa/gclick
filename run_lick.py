@@ -51,5 +51,5 @@ if __name__ == "__main__":
         sigma = np.sqrt(var)
         lick = Lick(wave, spec, bands)
         lick.classic_integration()
-        mcerr = mc_schiavon_err(wave, spec, sigma**2, bands)
+        mcerr = mc_schiavon_err(wave, spec, sigma, bands)
         break
