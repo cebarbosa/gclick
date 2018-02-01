@@ -16,7 +16,11 @@ user = getpass.getuser()
 def get_directories():
     if user == "kadu":
         home = "/home/kadu/Dropbox/gclick"
-        data_dir = os.path.join(home, "espectros_schiavon")
+        data_dir = os.path.join(home, "data")
+        tables_dir = os.path.join(home, "tables")
+    if user == "natalia":
+        home = "/home/kadu/Dropbox/gclick"
+        data_dir = os.path.join(home, "data")
         tables_dir = os.path.join(home, "tables")
     return locals()
 
