@@ -15,7 +15,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-from pysps.lick import Lick
+from lick.lick import Lick
 import project_settings as ps
 
 def mc_schiavon_err(wave, flux, sigma, bands, nsim=10):
@@ -35,12 +35,12 @@ def mc_schiavon_err(wave, flux, sigma, bands, nsim=10):
     err = np.nanstd(err, axis=0)
     return err
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     # Setting the name of the directories for different users
     dir_ = ps.get_directories()
     ###########################################################################
     # Reading file with definition of Lick indices bands
-    table = os.path.join(os.getcwd(), "pysps/tables/bands.txt")
+    table = os.path.join(os.getcwd(), "lick/tables/bands.txt")
     bands = np.loadtxt(table, usecols=(2, 3, 4, 5, 6, 7,))
     ###########################################################################
     # Changing to directory with the data and getting names of the files
