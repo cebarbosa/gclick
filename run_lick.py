@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from lick.lick import Lick
 import project_settings as ps
 
-def mc_schiavon_err(wave, flux, sigma, bands, nsim=10):
+def mc_schiavon_err(wave, flux, sigma, bands, nsim=200):
     """ Monte Carlo simulations to determine error in Lick indices. """
     npix = len(flux)
     pert = np.zeros((npix, nsim))
@@ -44,12 +44,12 @@ if __name__ == "__main__":
     bands = np.loadtxt(table, usecols=(2, 3, 4, 5, 6, 7,))
     ###########################################################################
     # Changing to directory with the data and getting names of the files
-    os.chdir(os.path.join(dir_["data_dir"], "schiavon2005"))
+    os.chdir(os.path.join(dir_["data_dir"], "erros_sch05"))
     filenames = sorted([_ for _ in os.listdir(".") if _.endswith("txt")])
     for fname in filenames:
+        print(fname)
         wave, spec, var, sn = np.loadtxt(fname, unpack=True)
         sigma = np.sqrt(var)
         lick = Lick(wave, spec, bands)
         lick.classic_integration()
         mcerr = mc_schiavon_err(wave, spec, sigma, bands)
-        break
