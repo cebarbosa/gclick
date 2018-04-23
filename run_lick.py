@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 from lick.lick import Lick
 import project_settings as ps
 
-def mc_schiavon_err(wave, flux, sigma, bands, nsim=10):
+def mc_schiavon_err(wave, flux, sigma, bands, nsim=200):
     """ Monte Carlo simulations to determine error in Lick indices. """
     npix = len(flux)
     pert = np.zeros((npix, nsim))

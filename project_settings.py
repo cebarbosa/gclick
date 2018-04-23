@@ -19,7 +19,7 @@ def get_directories():
         data_dir = os.path.join(home, "data")
         tables_dir = os.path.join(home, "tables")
     if user == "natalia":
-        home = "/home/kadu/Dropbox/gclick"
+        home = "/home/natalia/Desktop/I.C."
         data_dir = os.path.join(home, "data")
         tables_dir = os.path.join(home, "tables")
     return locals()
