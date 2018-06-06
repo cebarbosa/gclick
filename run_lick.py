@@ -17,7 +17,7 @@ from astropy.table import Table, hstack
 import matplotlib.pyplot as plt
 
 from lick.lick import Lick
-import project_settings as ps
+import context
 
 def mc_schiavon_err(wave, flux, sigma, bands, nsim=200):
     """ Monte Carlo simulations to determine error in Lick indices. """
@@ -37,8 +37,8 @@ def mc_schiavon_err(wave, flux, sigma, bands, nsim=200):
 
 if __name__ == "__main__":
     # Setting the name of the directories for different users
-    dir_ = ps.get_directories()
-    nsim = 10
+    dir_ = context.get_directories()
+    nsim = 200
     ###########################################################################
     # Reading file with definition of Lick indices bands
     table = os.path.join(os.getcwd(), "lick/tables/bands.txt")
@@ -51,7 +51,8 @@ if __name__ == "__main__":
     os.chdir(os.path.join(dir_["data_dir"], "erros_sch05"))
     filenames = sorted(os.listdir("."))
     results = []
-    for fname in filenames:
+    for i, fname in enumerate(filenames):
+        print("Processing {} ({}/{})".format(fname, i+1, len(filenames)))
         wave, spec, sigma, sn = np.loadtxt(fname, unpack=True)
         lick = Lick(wave, spec, bands)
         lick.classic_integration()
