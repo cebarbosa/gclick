@@ -5,9 +5,10 @@ Created on 16/05/16
 
 @author: Carlos Eduardo Barbosa
 
-Program to calculate lick indices
+Program to calculate lick indices.
 
 """
+from __future__ import print_function, division
 
 import numpy as np
 from scipy.interpolate import InterpolatedUnivariateSpline

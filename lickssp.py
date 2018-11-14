@@ -11,6 +11,7 @@ Model of SSPs using Lick indices
 from __future__ import print_function, division
 
 import os
+import shutil
 
 import numpy as np
 from astropy.table import Table, hstack, vstack
@@ -73,6 +74,8 @@ def model_lick(lick, errors, ssps, dbname, redo=False):
     """ Routine that performs the Bayesian modeling using MCMC."""
     if os.path.exists(dbname) and not redo:
         return
+    if os.path.exists(dbname):
+        shutil.rmtree(dbname)
     # Defining simple priors for the variables
     age_dist = pymc.Uniform(name="age_dist", lower=ssps.ages_lims[0],
                             upper=ssps.ages_lims[1])
@@ -111,4 +114,4 @@ if __name__ == "__main__":
         lick = np.array([gc[index] for index in indices])
         errors = np.array([gc[index] for index in e_indices])
         dbname = os.path.join(outdir, "{}.db".format(gc["spec"]))
-        model_lick(lick, errors, ssps, dbname)
+        model_lick(lick, errors, ssps, dbname, redo=True)

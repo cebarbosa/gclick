@@ -8,10 +8,11 @@ Created on 29/09/2016
 Tests computation of Lick indices using SSPs from the MILES library.
 
 """
+from __future__ import print_function, division
 import os
 
 import numpy as np
-import pyfits as pf
+from astropy.io import fits
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
@@ -31,9 +32,9 @@ def test_lick():
                       27,28,29,30,31,32,33,34,35))
     obs = []
     for i, star in enumerate(stars):
-        print star + ".fits"
-        spec = pf.getdata(star + ".fits")
-        h = pf.getheader(star + ".fits")
+        print("{}.fits".format(star))
+        spec = fits.getdata(star + ".fits")
+        h = fits.getheader(star + ".fits")
         w = h["CRVAL1"] + h["CDELT1"] * \
                             (np.arange(h["NAXIS1"]) + 1 - h["CRPIX1"])
         ll = Lick(w, spec, np.loadtxt(bands, usecols=(2,3,4,5,6,7,)))
